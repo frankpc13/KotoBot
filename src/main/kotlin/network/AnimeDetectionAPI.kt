@@ -15,4 +15,15 @@ object AnimeDetectionAPI {
         //create retrofit client
         return@lazy retrofit.create(TraceMeAPI::class.java)
     }
+
+    val meowClient: CatsAPI by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(CatsAPI.API_BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+
+        //create retrofit client
+        return@lazy retrofit.create(CatsAPI::class.java)
+    }
 }

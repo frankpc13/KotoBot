@@ -1,5 +1,6 @@
 package network
 
+import kotlinx.coroutines.Deferred
 import models.DataResponseTraceMe
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -16,6 +17,6 @@ interface TraceMeAPI {
 
     @Multipart
     @POST("search")
-    suspend fun getRelatedAnimeByImage(@Part image:MultipartBody.Part) : ResponseBody
+    fun getRelatedAnimeByImage(@Part image:MultipartBody.Part) : Deferred<ResponseBody>
 
 }
