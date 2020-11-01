@@ -16,22 +16,24 @@ class PurifyChatFromBotsCommand: Command() {
 
     override fun execute(event: CommandEvent?) {
         if (event?.member!!.id == "199802242038104064" || event.member.id == "342864920687280128") {
-            val member = event?.textChannel?.members?.find { x -> x.id == "235088799074484224" }
-            event!!.replyWarning("Starting delete process")
-            if (member != null) {
-                //val messages = event.textChannel?.history?.retrievedHistory?.filter { x -> x.member!!.id == member.id}
-                event.textChannel?.getHistoryBefore(event.message, 100)!!.queue {
-                    for (message in it.retrievedHistory) {
-                        if (message.member!!.id == member!!.id) {
-                            pp(message.contentDisplay)
-                            message.delete().queue()
-                        }
-                    }
-                }
+            /*val member = event
+                    .textChannel?.members?.find { x -> x.id == "235088799074484224" }
+            */
+            val member = "235088799074484224"
+            event.replyWarning("Starting delete process")
 
+            //val messages = event.textChannel?.history?.retrievedHistory?.filter { x -> x.member!!.id == member.id}
+            event.textChannel?.getHistoryBefore(event.message, 100)!!.queue {
+                val messages = it.retrievedHistory.filter { x -> x.author.isBot || x.contentRaw.contains("!play") || x.author.id == member}
+                println("numero de mensajes encontrados ${messages}")
+                for (message in messages) {
+                    println(message.author.id+ ' '+message.contentRaw)
+                    message.delete().queue()
+                }
             }
-            print(event?.textChannel?.members?.find { x -> x.id == "235088799074484224" })
-            event!!.replySuccess("Finish cleaning task!")
+            event.replySuccess("Finish cleaning task!")
+            println("objeto member: ${member}")
+
         } else {
          event.replyError("Need to be admin or related u moron!")
         }

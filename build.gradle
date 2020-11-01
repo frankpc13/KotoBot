@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    //read dotenv files
+    implementation "io.github.cdimascio:java-dotenv:5.2.2"
     implementation "com.tylerthrailkill.helpers:pretty-print:2.0.2"
     //saucenao bot
     implementation "com.github.insanusmokrassar:SauceNaoAPI:0.4.4"

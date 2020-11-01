@@ -6,12 +6,14 @@ import com.jagrosh.jdautilities.examples.command.ShutdownCommand
 import commands.CatCommand
 import commands.PurifyChatFromBotsCommand
 import commands.SauceCommand
+import io.github.cdimascio.dotenv.Dotenv
 import net.dv8tion.jda.api.AccountType
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import java.awt.Color
 import net.dv8tion.jda.api.Permission
+import java.util.*
 
 
 fun main() {
@@ -44,11 +46,20 @@ fun main() {
         SauceCommand(waiter),
             PurifyChatFromBotsCommand()
     )
-    val token = "Njk5NDIxMTU2NTI4MjI2MzE2.XpUItg.cLwSiLENwV3Nqb-jP0Mh-aO1sSc"
-    JDABuilder(AccountType.BOT)
+    var dotenv = Dotenv.load()
+    JDABuilder.createDefault(dotenv["DISCORD_TOKEN"])
+            .addEventListeners(waiter)
+            .setStatus(OnlineStatus.DO_NOT_DISTURB)
+            .setActivity(Activity.playing("loading..."))
+            .addEventListeners(waiter, client.build())
+            .build()
+
+    //deprecated
+   /* JDABuilder(AccountType.BOT)
         .setToken(token)
         .setStatus(OnlineStatus.DO_NOT_DISTURB)
         .setActivity(Activity.playing("loading..."))
         .addEventListeners(waiter, client.build())
-        .build()
+        .build()*/
 }
+
