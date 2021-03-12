@@ -6,6 +6,7 @@ import com.jagrosh.jdautilities.examples.command.ShutdownCommand
 import commands.CatCommand
 import commands.PurifyChatFromBotsCommand
 import commands.SauceCommand
+import commands.SayCommand
 import io.github.cdimascio.dotenv.Dotenv
 import net.dv8tion.jda.api.AccountType
 import net.dv8tion.jda.api.JDABuilder
@@ -44,9 +45,10 @@ fun main() {
         // command to shut off the bot
         ShutdownCommand(),
         SauceCommand(waiter),
-            PurifyChatFromBotsCommand()
+            PurifyChatFromBotsCommand(),
+            SayCommand()
     )
-    var dotenv = Dotenv.load()
+    val dotenv = Dotenv.load()
     JDABuilder.createDefault(dotenv["DISCORD_TOKEN"])
             .addEventListeners(waiter)
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
