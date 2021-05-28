@@ -10,6 +10,10 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
 }
 jar {
     manifest {
@@ -31,7 +35,7 @@ dependencies {
     //discord bot
     implementation 'com.jagrosh:jda-utilities:3.0.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "net.dv8tion:JDA:4.2.0_168"
+    implementation "net.dv8tion:JDA:4.2.1_253"
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
